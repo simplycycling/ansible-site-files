@@ -1,0 +1,23 @@
+---
+# tasks file for hswong3i.tzdata
+
+- name: apt-get install
+  apt:
+    name="{{ item }}"
+    state=latest
+  with_items:
+    - tzdata
+  notify: update timezone
+  tags: hswong3i.tzdata
+
+- name: copy templates
+  template:
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
+  with_items:
+    - { src: 'etc/timezone.j2', dest: '/etc/timezone',  owner: 'root', group: 'root', mode: '0644' }
+  notify: update timezone
+  tags: hswong3i.tzdata
