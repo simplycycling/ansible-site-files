@@ -1,0 +1,6 @@
+---
+- name: Home
+  hosts: home
+  sudo: True
+  roles:
+    - common
