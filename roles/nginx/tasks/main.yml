@@ -1,0 +1,12 @@
+---
+- name: Add nginx repo
+  apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present
+
+- name: Add nginx sources repo
+  apt_repository: repo='deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present
+
+- name: Add nginx repository key
+  apt_key: data="{{ lookup('file', 'nginx_signing.key') }}" state=present
+
+- name: Install nginx
+  apt: name=nginx update_cache=yes cache_valid_time=3600
