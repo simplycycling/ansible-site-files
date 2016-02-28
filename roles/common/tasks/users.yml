@@ -1,0 +1,5 @@
+---
+- name: Add user
+  user: name=rsherman shell=/bin/bash groups=admin
+
+- authorized_key: user=rsherman key="{{ lookup('file', 'rsherman-pubkey') }}"
