@@ -3,6 +3,7 @@
   hosts: home
   sudo: True
   roles:
-    - common
     - { role: hswong3i.tzdata, tzdata_timezone: 'America/New_York' }
+    - common
+
  #   - nginx

@@ -1,3 +1,6 @@
 ---
 - name: bounce resolvconf
   command: /sbin/resolvconf -u
+
+- name: reboot
+  shell: reboot
