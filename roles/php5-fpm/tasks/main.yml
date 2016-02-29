@@ -28,3 +28,11 @@
   notify:
     - restart php5-fpm
     - restart nginx
+
+- name: enable php5-mcrypt
+  shell: php5enmod mcrypt
+  args:
+    creates: /etc/php5/cli/conf.d/20-mcrypt.ini
+  notify:
+    - restart php5-fpm
+    - restart nginx
