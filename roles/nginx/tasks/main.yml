@@ -1,12 +1,18 @@
 ---
 - name: Add nginx repo
-  apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present
+  apt_repository: repo='ppa:nginx/stable' state=present
 
-- name: Add nginx sources repo
-  apt_repository: repo='deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present
-
-- name: Add nginx repository key
-  apt_key: data="{{ lookup('file', 'nginx_signing.key') }}" state=present
+#- name: Add nginx repository key
+#  apt_key: data="{{ lookup('file', 'nginx_signing.key') }}" state=present
 
 - name: Install nginx
   apt: name=nginx update_cache=yes cache_valid_time=3600
+
+- name: Ensure nginx starts at boot
+  service: name=nginx enabled=yes
+
+- include: directories.yml
+
+- name: Push nginx.conf
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf owner=www-data group=www-data
+  notify: restart nginx

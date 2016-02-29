@@ -4,6 +4,5 @@
   sudo: True
   roles:
     - { role: hswong3i.tzdata, tzdata_timezone: 'America/New_York' }
+    - nginx
     - common
-
- #   - nginx
